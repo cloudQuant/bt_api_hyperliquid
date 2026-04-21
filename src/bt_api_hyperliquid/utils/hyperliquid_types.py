@@ -1,0 +1,28 @@
+"""
+Hyperliquid types and constants.
+"""
+
+from __future__ import annotations
+
+LIMIT_ORDER = "limit"
+MARKET_ORDER = "market"
+TRIGGER_ORDER = "trigger"
+
+TIF_GTC = "Gtc"
+TIF_IOC = "Ioc"
+TIF_POST_ONLY = "PostOnly"
+
+SIDE_BUY = True
+SIDE_SELL = False
+
+STATUS_NEW = "NEW"
+STATUS_PENDING_CANCEL = "PENDING_CANCEL"
+STATUS_FILLED = "FILLED"
+STATUS_CANCELED = "CANCELED"
+STATUS_REJECTED = "REJECTED"
+STATUS_EXPIRED = "EXPIRED"
+STATUS_OPEN = "OPEN"
+STATUS_CLOSED = "CLOSED"
+
+TRIGGER_STOP = "sl"
+TRIGGER_TAKE_PROFIT = "tp"

@@ -1,0 +1,2 @@
+[bt_api.plugins]
+hyperliquid = bt_api_hyperliquid.plugin:register_plugin
