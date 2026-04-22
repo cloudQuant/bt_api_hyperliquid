@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import Any
 
 from bt_api_base.balance_utils import simple_balance_handler as _hyperliquid_balance_handler
+from bt_api_base.registry import ExchangeRegistry
+
 from bt_api_hyperliquid.exchange_data.hyperliquid_exchange_data import (
     HyperliquidExchangeDataSpot,
     HyperliquidExchangeDataSwap,
@@ -13,7 +15,6 @@ from bt_api_hyperliquid.feeds.live_hyperliquid import (
     HyperliquidRequestData,
     HyperliquidRequestDataSpot,
 )
-from bt_api_base.registry import ExchangeRegistry
 
 
 def _hyperliquid_swap_subscribe_handler(

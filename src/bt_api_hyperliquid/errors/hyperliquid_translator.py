@@ -4,8 +4,6 @@ Hyperliquid error translator.
 
 from __future__ import annotations
 
-from typing import Any
-
 from bt_api_base.error import ErrorTranslator, UnifiedErrorCode
 
 

@@ -40,13 +40,20 @@ pip install -e .
 ### Quick Start
 
 ```python
-from bt_api_hyperliquid import HyperliquidApi
+from bt_api import BtApi
 
 # Initialize
-feed = HyperliquidApi(api_key="your_key", secret="your_secret")
+api = BtApi(
+    exchange_kwargs={
+        "HYPERLIQUID___SPOT": {
+            "api_key": "your_api_key",
+            "secret": "your_secret",
+        }
+    }
+)
 
 # Get ticker data
-ticker = feed.get_ticker("BTCUSDT")
+ticker = api.get_tick("HYPERLIQUID___SPOT", "BTCUSDT")
 print(ticker)
 ```
 
@@ -130,13 +137,20 @@ pip install -e .
 ### 快速开始
 
 ```python
-from bt_api_hyperliquid import HyperliquidApi
+from bt_api import BtApi
 
 # 初始化
-feed = HyperliquidApi(api_key="your_key", secret="your_secret")
+api = BtApi(
+    exchange_kwargs={
+        "HYPERLIQUID___SPOT": {
+            "api_key": "your_api_key",
+            "secret": "your_secret",
+        }
+    }
+)
 
 # 获取行情数据
-ticker = feed.get_ticker("BTCUSDT")
+ticker = api.get_tick("HYPERLIQUID___SPOT", "BTCUSDT")
 print(ticker)
 ```
 

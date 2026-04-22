@@ -3,18 +3,18 @@ from __future__ import annotations
 from typing import Any
 
 import requests
-from eth_account import Account
-
 from bt_api_base.containers.requestdatas.request_data import RequestData
 from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule, RateLimitScope, RateLimitType
+from eth_account import Account
+
+from bt_api_hyperliquid.errors.hyperliquid_translator import HyperliquidErrorTranslator
 from bt_api_hyperliquid.exchange_data.hyperliquid_exchange_data import (
     HyperliquidExchangeDataSpot,
     HyperliquidExchangeDataSwap,
 )
-from bt_api_hyperliquid.errors.hyperliquid_translator import HyperliquidErrorTranslator
 
 
 class HyperliquidRequestData(Feed):

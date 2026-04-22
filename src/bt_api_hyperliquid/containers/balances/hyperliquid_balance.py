@@ -131,7 +131,11 @@ class HyperliquidSwapRequestBalanceData(BalanceData):
         return self.account_value
 
     def __str__(self):
-        return f"HyperliquidSwapRequestBalanceData(coin={self.coin}, total={self.total}, available={self.available}, pnl={self.unrealized_pnl})"
+        return (
+            f"HyperliquidSwapRequestBalanceData(coin={self.coin}, "
+            f"total={self.total}, available={self.available}, "
+            f"pnl={self.unrealized_pnl})"
+        )
 
 
 class HyperliquidSpotRequestBalanceData(BalanceData):

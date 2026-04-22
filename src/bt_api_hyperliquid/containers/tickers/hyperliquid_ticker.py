@@ -125,4 +125,8 @@ class HyperliquidTickerData(TickerData):
         return self.last_volume
 
     def __str__(self) -> str:
-        return f"HyperliquidTickerData(symbol={self.symbol_name}, last_price={self.last_price}, bid={self.bid_price}, ask={self.ask_price})"
+        return (
+            f"HyperliquidTickerData(symbol={self.symbol_name}, "
+            f"last_price={self.last_price}, bid={self.bid_price}, "
+            f"ask={self.ask_price})"
+        )

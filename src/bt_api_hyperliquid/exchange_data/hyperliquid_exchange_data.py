@@ -6,6 +6,8 @@ Hardcoded defaults following gateio pattern (no YAML config loading).
 
 from __future__ import annotations
 
+from typing import Any
+
 from bt_api_base.containers.exchanges.exchange_data import ExchangeData
 
 

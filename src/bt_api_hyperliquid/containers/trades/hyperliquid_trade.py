@@ -105,4 +105,8 @@ class HyperliquidSpotWssTradeData(TradeData):
         return self.fee
 
     def __str__(self):
-        return f"HyperliquidSpotWssTradeData(trade_id={self.trade_id}, side={self.side}, price={self.price}, quantity={self.quantity})"
+        return (
+            f"HyperliquidSpotWssTradeData(trade_id={self.trade_id}, "
+            f"side={self.side}, price={self.price}, "
+            f"quantity={self.quantity})"
+        )
