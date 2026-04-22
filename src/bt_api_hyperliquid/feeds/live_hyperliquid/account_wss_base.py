@@ -15,16 +15,14 @@ class HyperliquidAccountWssData(Feed):
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
         super().__init__(data_queue, **kwargs)
-        self.asset_type = kwargs.get("asset_type", "SPOT")
-        self.logger_name = kwargs.get("logger_name", "hyperliquid_account_wss.log")
-        self._params = kwargs.get("exchange_data")
-        self.request_logger = get_logger("hyperliquid_account_wss")
-        self.async_logger = get_logger("hyperliquid_account_wss")
+        self.asset_type = kwargs.get('asset_type', 'SPOT')
+        self.logger_name = kwargs.get('logger_name', 'hyperliquid_account_wss.log')
+        self._params = kwargs.get('exchange_data')
+        self.request_logger = get_logger('hyperliquid_account_wss')
+        self.async_logger = get_logger('hyperliquid_account_wss')
 
-        self.ws_url = kwargs.get(
-            "ws_url", self._params.wss_url if self._params else "wss://api.hyperliquid.xyz/ws"
-        )
-        self.user_address = kwargs.get("user_address", "")
+        self.ws_url = kwargs.get('ws_url', self._params.wss_url if self._params else 'wss://api.hyperliquid.xyz/ws')
+        self.user_address = kwargs.get('user_address', '')
         self.subscriptions: list[dict[str, Any]] = []
         self.is_running = False
         self.ws_thread: threading.Thread | None = None
@@ -37,21 +35,21 @@ class HyperliquidAccountWssData(Feed):
             data = json.loads(message)
             self.process_message(data)
         except Exception as e:
-            self.request_logger.error(f"Error processing WebSocket message: {e}")
+            self.request_logger.error(f'Error processing WebSocket message: {e}')
 
     def process_message(self, data):
         pass
 
     def on_open(self, ws):
-        self.request_logger.info("Account WebSocket connection opened")
+        self.request_logger.info('Account WebSocket connection opened')
         for subscription in self.subscriptions:
             ws.send(json.dumps(subscription))
 
     def on_error(self, ws, error):
-        self.request_logger.error(f"WebSocket error: {error}")
+        self.request_logger.error(f'WebSocket error: {error}')
 
     def on_close(self, ws, close_status_code, close_msg):
-        self.request_logger.info("WebSocket connection closed")
+        self.request_logger.info('WebSocket connection closed')
         self.is_running = False
 
     def subscribe(self, subscription):

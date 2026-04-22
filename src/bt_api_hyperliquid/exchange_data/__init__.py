@@ -7,7 +7,7 @@ from bt_api_hyperliquid.exchange_data.hyperliquid_exchange_data import (
 )
 
 __all__ = [
-    "HyperliquidExchangeData",
-    "HyperliquidExchangeDataSpot",
-    "HyperliquidExchangeDataSwap",
+    'HyperliquidExchangeData',
+    'HyperliquidExchangeDataSpot',
+    'HyperliquidExchangeDataSwap',
 ]

@@ -7,7 +7,7 @@ from bt_api_base.containers.trades.trade import TradeData
 from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_string
 from bt_api_base.logging_factory import get_logger
 
-logger = get_logger("container")
+logger = get_logger('container')
 
 
 class HyperliquidSpotWssTradeData(TradeData):
@@ -15,7 +15,7 @@ class HyperliquidSpotWssTradeData(TradeData):
 
     def __init__(self, trade_info, symbol_name, asset_type, has_been_json_encoded=False):
         super().__init__(trade_info, has_been_json_encoded)
-        self.exchange_name = "HYPERLIQUID"
+        self.exchange_name = 'HYPERLIQUID'
         self.local_update_time = time.time()
         self.symbol_name = symbol_name
         self.asset_type = asset_type
@@ -39,35 +39,35 @@ class HyperliquidSpotWssTradeData(TradeData):
                 self.trade_data = json.loads(self.trade_info)
 
             if isinstance(self.trade_data, dict):
-                self.trade_id = from_dict_get_string(self.trade_data, "tid")
-                self.order_id = from_dict_get_string(self.trade_data, "orderOid")
-                self.side = from_dict_get_string(self.trade_data, "side")
-                self.price = from_dict_get_float(self.trade_data, "px")
-                self.quantity = from_dict_get_float(self.trade_data, "sz")
-                self.timestamp = from_dict_get_float(self.trade_data, "time")
-                self.fee = from_dict_get_float(self.trade_data, "fee")
+                self.trade_id = from_dict_get_string(self.trade_data, 'tid')
+                self.order_id = from_dict_get_string(self.trade_data, 'orderOid')
+                self.side = from_dict_get_string(self.trade_data, 'side')
+                self.price = from_dict_get_float(self.trade_data, 'px')
+                self.quantity = from_dict_get_float(self.trade_data, 'sz')
+                self.timestamp = from_dict_get_float(self.trade_data, 'time')
+                self.fee = from_dict_get_float(self.trade_data, 'fee')
 
             self.has_been_init_data = True
 
         except Exception as e:
-            logger.error(f"Error initializing Hyperliquid trade data: {e}", exc_info=True)
+            logger.error(f'Error initializing Hyperliquid trade data: {e}', exc_info=True)
 
         return self
 
     def get_all_data(self):
         if self.all_data is None:
             self.all_data = {
-                "exchange_name": self.exchange_name,
-                "symbol_name": self.symbol_name,
-                "asset_type": self.asset_type,
-                "local_update_time": self.local_update_time,
-                "trade_id": self.trade_id,
-                "order_id": self.order_id,
-                "side": self.side,
-                "price": self.price,
-                "quantity": self.quantity,
-                "timestamp": self.timestamp,
-                "fee": self.fee,
+                'exchange_name': self.exchange_name,
+                'symbol_name': self.symbol_name,
+                'asset_type': self.asset_type,
+                'local_update_time': self.local_update_time,
+                'trade_id': self.trade_id,
+                'order_id': self.order_id,
+                'side': self.side,
+                'price': self.price,
+                'quantity': self.quantity,
+                'timestamp': self.timestamp,
+                'fee': self.fee,
             }
         return self.all_data
 
@@ -106,7 +106,7 @@ class HyperliquidSpotWssTradeData(TradeData):
 
     def __str__(self):
         return (
-            f"HyperliquidSpotWssTradeData(trade_id={self.trade_id}, "
-            f"side={self.side}, price={self.price}, "
-            f"quantity={self.quantity})"
+            f'HyperliquidSpotWssTradeData(trade_id={self.trade_id}, '
+            f'side={self.side}, price={self.price}, '
+            f'quantity={self.quantity})'
         )

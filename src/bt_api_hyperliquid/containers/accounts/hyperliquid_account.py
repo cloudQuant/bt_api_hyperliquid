@@ -7,7 +7,7 @@ from bt_api_base.containers.accounts.account import AccountData
 from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_string
 from bt_api_base.logging_factory import get_logger
 
-logger = get_logger("container")
+logger = get_logger('container')
 
 
 class HyperliquidSpotWssAccountData(AccountData):
@@ -15,7 +15,7 @@ class HyperliquidSpotWssAccountData(AccountData):
 
     def __init__(self, account_info, symbol_name, asset_type, has_been_json_encoded=False):
         super().__init__(account_info, has_been_json_encoded)
-        self.exchange_name = "HYPERLIQUID"
+        self.exchange_name = 'HYPERLIQUID'
         self.local_update_time = time.time()
         self.symbol_name = symbol_name
         self.asset_type = asset_type
@@ -38,39 +38,39 @@ class HyperliquidSpotWssAccountData(AccountData):
                 self.account_data = json.loads(self.account_info)
 
             if isinstance(self.account_data, dict):
-                self.user_address = from_dict_get_string(self.account_data, "user")
-                self.account_value = from_dict_get_float(self.account_data, "accountValue")
-                self.total_margin_used = from_dict_get_float(self.account_data, "totalMarginUsed")
-                self.initial_margin = from_dict_get_float(self.account_data, "initialMargin")
+                self.user_address = from_dict_get_string(self.account_data, 'user')
+                self.account_value = from_dict_get_float(self.account_data, 'accountValue')
+                self.total_margin_used = from_dict_get_float(self.account_data, 'totalMarginUsed')
+                self.initial_margin = from_dict_get_float(self.account_data, 'initialMargin')
 
-                if "assetPositions" in self.account_data:
-                    for position in self.account_data["assetPositions"]:
+                if 'assetPositions' in self.account_data:
+                    for position in self.account_data['assetPositions']:
                         self.positions.append(position)
 
-                if "balances" in self.account_data:
-                    for balance in self.account_data["balances"]:
+                if 'balances' in self.account_data:
+                    for balance in self.account_data['balances']:
                         self.balances.append(balance)
 
             self.has_been_init_data = True
 
         except Exception as e:
-            logger.error(f"Error initializing Hyperliquid account data: {e}", exc_info=True)
+            logger.error(f'Error initializing Hyperliquid account data: {e}', exc_info=True)
 
         return self
 
     def get_all_data(self):
         if self.all_data is None:
             self.all_data = {
-                "exchange_name": self.exchange_name,
-                "symbol_name": self.symbol_name,
-                "asset_type": self.asset_type,
-                "local_update_time": self.local_update_time,
-                "user_address": self.user_address,
-                "account_value": self.account_value,
-                "total_margin_used": self.total_margin_used,
-                "initial_margin": self.initial_margin,
-                "positions": self.positions,
-                "balances": self.balances,
+                'exchange_name': self.exchange_name,
+                'symbol_name': self.symbol_name,
+                'asset_type': self.asset_type,
+                'local_update_time': self.local_update_time,
+                'user_address': self.user_address,
+                'account_value': self.account_value,
+                'total_margin_used': self.total_margin_used,
+                'initial_margin': self.initial_margin,
+                'positions': self.positions,
+                'balances': self.balances,
             }
         return self.all_data
 
@@ -105,6 +105,4 @@ class HyperliquidSpotWssAccountData(AccountData):
         return self.balances
 
     def __str__(self):
-        return (
-            f"HyperliquidSpotWssAccountData(user={self.user_address}, value={self.account_value})"
-        )
+        return f'HyperliquidSpotWssAccountData(user={self.user_address}, value={self.account_value})'

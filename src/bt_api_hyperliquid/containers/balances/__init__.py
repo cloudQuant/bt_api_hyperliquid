@@ -6,6 +6,6 @@ from bt_api_hyperliquid.containers.balances.hyperliquid_balance import (
 )
 
 __all__ = [
-    "HyperliquidSwapRequestBalanceData",
-    "HyperliquidSpotRequestBalanceData",
+    'HyperliquidSwapRequestBalanceData',
+    'HyperliquidSpotRequestBalanceData',
 ]

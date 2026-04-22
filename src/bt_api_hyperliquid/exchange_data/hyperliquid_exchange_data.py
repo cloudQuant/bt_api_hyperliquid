@@ -22,84 +22,84 @@ class HyperliquidExchangeData(ExchangeData):
     def __init__(self) -> None:
         """Initialize Hyperliquid exchange data."""
         super().__init__()
-        self.exchange_name = "hyperliquid"
-        self.rest_url = "https://api.hyperliquid.xyz"
-        self.wss_url = "wss://api.hyperliquid.xyz/ws"
-        self.testnet_rest_url = "https://api.hyperliquid-testnet.xyz"
-        self.testnet_wss_url = "wss://api.hyperliquid-testnet.xyz/ws"
+        self.exchange_name = 'hyperliquid'
+        self.rest_url = 'https://api.hyperliquid.xyz'
+        self.wss_url = 'wss://api.hyperliquid.xyz/ws'
+        self.testnet_rest_url = 'https://api.hyperliquid-testnet.xyz'
+        self.testnet_wss_url = 'wss://api.hyperliquid-testnet.xyz/ws'
 
         # Default kline periods for Hyperliquid
         self.kline_periods = {
-            "1m": "1m",
-            "3m": "3m",
-            "5m": "5m",
-            "15m": "15m",
-            "30m": "30m",
-            "1h": "1h",
-            "2h": "2h",
-            "4h": "4h",
-            "8h": "8h",
-            "12h": "12h",
-            "1d": "1d",
-            "3d": "3d",
-            "1w": "1w",
-            "1M": "1M",
+            '1m': '1m',
+            '3m': '3m',
+            '5m': '5m',
+            '15m': '15m',
+            '30m': '30m',
+            '1h': '1h',
+            '2h': '2h',
+            '4h': '4h',
+            '8h': '8h',
+            '12h': '12h',
+            '1d': '1d',
+            '3d': '3d',
+            '1w': '1w',
+            '1M': '1M',
         }
 
         self.reverse_kline_periods = {v: k for k, v in self.kline_periods.items()}
 
         # Status dictionary
         self.status_dict = {
-            0: "NEW",
-            1: "PENDING_CANCEL",
-            2: "FILLED",
-            3: "CANCELED",
-            4: "REJECTED",
-            5: "EXPIRED",
-            6: "OPEN",
-            7: "CLOSED",
+            0: 'NEW',
+            1: 'PENDING_CANCEL',
+            2: 'FILLED',
+            3: 'CANCELED',
+            4: 'REJECTED',
+            5: 'EXPIRED',
+            6: 'OPEN',
+            7: 'CLOSED',
         }
 
         # Trading symbol mapping for Hyperliquid
         self.trading_symbols = {
-            "BTC/USDC": "BTC",
-            "ETH/USDC": "ETH",
-            "SOL/USDC": "SOL",
-            "LINK/USDC": "LINK",
-            "UNI/USDC": "UNI",
-            "OP/USDC": "OP",
-            "ARB/USDC": "ARB",
+            'BTC/USDC': 'BTC',
+            'ETH/USDC': 'ETH',
+            'SOL/USDC': 'SOL',
+            'LINK/USDC': 'LINK',
+            'UNI/USDC': 'UNI',
+            'OP/USDC': 'OP',
+            'ARB/USDC': 'ARB',
         }
 
     def get_symbol(self, symbol: str) -> str:
         """Convert trading symbol to Hyperliquid format."""
-        if "/" in symbol and symbol.split("/")[1] == "USDC":
-            return symbol.split("/")[0]
+        if '/' in symbol and symbol.split('/')[1] == 'USDC':
+            return symbol.split('/')[0]
         return symbol
 
     def get_rest_path(self, request_type: str, **kwargs) -> str:
         """Get REST API path for request type."""
         rest_paths = {
-            "get_all_mids": "/info",
-            "get_meta": "/info",
-            "get_spot_meta": "/info",
-            "get_l2_book": "/info",
-            "get_candle_snapshot": "/info",
-            "get_recent_trades": "/info",
-            "get_exchange_status": "/info",
-            "get_clearinghouse_state": "/info",
-            "get_spot_clearinghouse_state": "/info",
-            "get_order_status": "/info",
-            "get_user_fills": "/info",
-            "get_user_funding": "/info",
-            "make_order": "/exchange",
-            "cancel_order": "/exchange",
-            "modify_order": "/exchange",
-            "update_leverage": "/exchange",
-            "usdc_transfer": "/exchange",
-            "withdraw": "/exchange",
+            'get_all_mids': '/info',
+            'get_meta': '/info',
+            'get_spot_meta': '/info',
+            'get_l2_book': '/info',
+            'get_candle_snapshot': '/info',
+            'get_recent_trades': '/info',
+            'get_exchange_status': '/info',
+            'get_clearinghouse_state': '/info',
+            'get_spot_clearinghouse_state': '/info',
+            'get_order_status': '/info',
+            'get_user_fills': '/info',
+            'get_user_funding': '/info',
+            'make_order': '/exchange',
+            'cancel_order': '/exchange',
+            'modify_order': '/exchange',
+            'update_leverage': '/exchange',
+            'usdc_transfer': '/exchange',
+            'withdraw': '/exchange',
         }
-        return rest_paths.get(request_type, "/info")
+        return rest_paths.get(request_type, '/info')
 
     def get_wss_path(self, channel_type: Any, **kwargs) -> str:
         """Get WebSocket channel path."""
@@ -111,7 +111,7 @@ class HyperliquidExchangeData(ExchangeData):
 
     def get_order_status_text(self, status_code):
         """Convert status code to text."""
-        return self.status_dict.get(status_code, f"UNKNOWN_{status_code}")
+        return self.status_dict.get(status_code, f'UNKNOWN_{status_code}')
 
     def get_timeframe_minutes(self, timeframe):
         """Convert timeframe string to minutes."""
@@ -119,18 +119,18 @@ class HyperliquidExchangeData(ExchangeData):
 
     def get_timeframe_from_minutes(self, minutes):
         """Convert minutes to timeframe string."""
-        return self.reverse_kline_periods.get(minutes, "1h")
+        return self.reverse_kline_periods.get(minutes, '1h')
 
     def get_leverage_limit(self, symbol):
         """Get maximum leverage for symbol."""
         leverage_limits = {
-            "BTC": 100,
-            "ETH": 50,
-            "SOL": 50,
-            "LINK": 20,
-            "UNI": 20,
-            "OP": 20,
-            "ARB": 20,
+            'BTC': 100,
+            'ETH': 50,
+            'SOL': 50,
+            'LINK': 20,
+            'UNI': 20,
+            'OP': 20,
+            'ARB': 20,
         }
         base_symbol = self.get_symbol(symbol)
         return leverage_limits.get(base_symbol, 20)
@@ -142,9 +142,9 @@ class HyperliquidExchangeDataSpot(HyperliquidExchangeData):
     def __init__(self) -> None:
         """Initialize Hyperliquid spot data."""
         super().__init__()
-        self.exchange_name = "hyperliquid_spot"
+        self.exchange_name = 'hyperliquid_spot'
         self.spot_symbols = {
-            "PURR/USDC": "PURR/USDC",
+            'PURR/USDC': 'PURR/USDC',
         }
 
 
@@ -154,4 +154,4 @@ class HyperliquidExchangeDataSwap(HyperliquidExchangeData):
     def __init__(self) -> None:
         """Initialize Hyperliquid swap data."""
         super().__init__()
-        self.exchange_name = "hyperliquid_swap"
+        self.exchange_name = 'hyperliquid_swap'

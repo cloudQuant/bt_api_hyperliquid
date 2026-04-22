@@ -73,7 +73,15 @@ ignore = [
     "TRY003",
     "F401",
     "F841",
+    "E501",
+    "Q000",
+    "Q003",
+    "F403",
 ]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
 
 [tool.mypy]
 python_version = "3.9"
