@@ -41,6 +41,7 @@ classifiers = [
 ]
 dependencies = [
     "bt_api_base>=0.15,<1.0",
+    "eth-account>=0.10",
 ]
 
 [project.optional-dependencies]
