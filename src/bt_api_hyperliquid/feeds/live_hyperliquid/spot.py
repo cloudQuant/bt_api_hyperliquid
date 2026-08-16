@@ -29,6 +29,7 @@ class HyperliquidRequestDataSpot(HyperliquidRequestData):
     """Hyperliquid spot trading request data"""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.logger_name = kwargs.get("logger_name", "hyperliquid_spot_feed.log")
@@ -304,6 +305,7 @@ class HyperliquidMarketWssDataSpot(HyperliquidMarketWssData):
     """Hyperliquid spot market WebSocket data"""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.symbols = kwargs.get("symbols", [])
@@ -417,6 +419,7 @@ class HyperliquidAccountWssDataSpot(HyperliquidAccountWssData):
     """Hyperliquid spot account WebSocket data"""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.user_address = kwargs.get("user_address", "")

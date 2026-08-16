@@ -1,3 +1,4 @@
+"""Module documentation"""
 from __future__ import annotations
 
 from typing import Any
@@ -38,6 +39,7 @@ class HyperliquidRequestData(Feed):
         }
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
 
         self.asset_type = kwargs.get("asset_type", "SPOT")
@@ -83,6 +85,7 @@ class HyperliquidRequestData(Feed):
         self.error_translator = HyperliquidErrorTranslator()
 
     def request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
+        """request method"""
         if extra_data is None:
             extra_data = {}
         if body is None:
@@ -99,6 +102,7 @@ class HyperliquidRequestData(Feed):
     async def async_request(
         self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False
     ):
+        """async_request method"""
         if extra_data is None:
             extra_data = {}
         if body is None:
@@ -114,6 +118,7 @@ class HyperliquidRequestData(Feed):
         return RequestData(response, extra_data)
 
     def async_callback(self, future):
+        """async_callback method"""
         try:
             result = future.result()
             self.data_queue.put(result)
@@ -155,10 +160,12 @@ class HyperliquidRequestData(Feed):
         return path, body, extra_data
 
     def get_tick(self, symbol, extra_data=None, **kwargs):
+        """get_tick method"""
         path, body, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         return self.request(path, body=body, extra_data=extra_data)
 
     def async_get_tick(self, symbol, extra_data=None, **kwargs):
+        """async_get_tick method"""
         path, body, extra_data = self._get_tick(symbol, extra_data, **kwargs)
         self.submit(
             self.async_request(path, body=body, extra_data=extra_data),
@@ -182,10 +189,12 @@ class HyperliquidRequestData(Feed):
         return path, body, extra_data
 
     def get_depth(self, symbol, count=20, extra_data=None, **kwargs):
+        """get_depth method"""
         path, body, extra_data = self._get_depth(symbol, count, extra_data, **kwargs)
         return self.request(path, body=body, extra_data=extra_data)
 
     def async_get_depth(self, symbol, count=20, extra_data=None, **kwargs):
+        """async_get_depth method"""
         path, body, extra_data = self._get_depth(symbol, count, extra_data, **kwargs)
         self.submit(
             self.async_request(path, body=body, extra_data=extra_data),
@@ -215,10 +224,12 @@ class HyperliquidRequestData(Feed):
         return path, body, extra_data
 
     def get_kline(self, symbol, period, count=20, extra_data=None, **kwargs):
+        """get_kline method"""
         path, body, extra_data = self._get_kline(symbol, period, count, extra_data, **kwargs)
         return self.request(path, body=body, extra_data=extra_data)
 
     def async_get_kline(self, symbol, period, count=20, extra_data=None, **kwargs):
+        """async_get_kline method"""
         path, body, extra_data = self._get_kline(symbol, period, count, extra_data, **kwargs)
         self.submit(
             self.async_request(path, body=body, extra_data=extra_data),
@@ -226,6 +237,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_exchange_info(self, extra_data=None, **kwargs):
+        """get_exchange_info method"""
         if extra_data is None:
             extra_data = {}
         path = self._params.get_rest_path("get_meta")
@@ -241,6 +253,7 @@ class HyperliquidRequestData(Feed):
         return self.request(path, body=body, extra_data=extra_data)
 
     def get_server_time(self, extra_data=None, **kwargs):
+        """get_server_time method"""
         if extra_data is None:
             extra_data = {}
         path = self._params.get_rest_path("get_all_mids")
@@ -256,6 +269,7 @@ class HyperliquidRequestData(Feed):
         return self.request(path, body=body, extra_data=extra_data)
 
     def get_all_mids(self):
+        """get_all_mids method"""
         body = {"type": "allMids"}
         result = self._make_request("get_all_mids", **body)
         return self._get_request_data(
@@ -269,6 +283,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_meta(self):
+        """get_meta method"""
         body = {"type": "meta"}
         result = self._make_request("get_meta", **body)
         return self._get_request_data(
@@ -282,6 +297,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_spot_meta(self):
+        """get_spot_meta method"""
         body = {"type": "spotMeta"}
         result = self._make_request("get_spot_meta", **body)
         return self._get_request_data(
@@ -295,6 +311,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_l2_book(self, coin, depth=5):
+        """get_l2_book method"""
         body = {"type": "l2Book", "coin": coin, "level": 2}
         result = self._make_request("get_l2_book", **body)
         return self._get_request_data(
@@ -308,6 +325,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_candle_snapshot(self, coin, interval, start_time=None, end_time=None):
+        """get_candle_snapshot method"""
         req = {"coin": coin, "interval": interval}
         if start_time:
             req["startTime"] = start_time
@@ -326,6 +344,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_recent_trades(self, coin, limit=100):
+        """get_recent_trades method"""
         body = {"type": "recentTrades", "coin": coin, "limit": limit}
         result = self._make_request("get_recent_trades", **body)
         return self._get_request_data(
@@ -339,6 +358,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_exchange_status(self):
+        """get_exchange_status method"""
         body = {"type": "exchangeStatus"}
         result = self._make_request("get_exchange_status", **body)
         return self._get_request_data(
@@ -352,6 +372,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_clearinghouse_state(self, user=None):
+        """get_clearinghouse_state method"""
         user = user or self.address
         if not user:
             raise ValueError("User address required for clearinghouse state")
@@ -368,6 +389,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_spot_clearinghouse_state(self, user=None):
+        """get_spot_clearinghouse_state method"""
         user = user or self.address
         if not user:
             raise ValueError("User address required for spot clearinghouse state")
@@ -384,6 +406,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_order_status(self, user, oid):
+        """get_order_status method"""
         body = {"type": "orderStatus", "user": user, "oid": oid}
         result = self._make_request("get_order_status", **body)
         return self._get_request_data(
@@ -397,6 +420,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_user_fills(self, user, limit=100):
+        """get_user_fills method"""
         body = {"type": "userFills", "user": user, "limit": limit}
         result = self._make_request("get_user_fills", **body)
         return self._get_request_data(
@@ -410,6 +434,7 @@ class HyperliquidRequestData(Feed):
         )
 
     def get_user_funding(self, user):
+        """get_user_funding method"""
         body = {"type": "userFunding", "user": user}
         result = self._make_request("get_user_funding", **body)
         return self._get_request_data(

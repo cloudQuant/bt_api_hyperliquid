@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 __version__ = "0.15.0"
 
 from bt_api_hyperliquid.exchange_data.hyperliquid_exchange_data import (

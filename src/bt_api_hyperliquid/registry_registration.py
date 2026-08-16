@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -59,6 +60,7 @@ def _hyperliquid_spot_subscribe_handler(
 
 
 def register_hyperliquid(registry: type[ExchangeRegistry]) -> None:
+    """register_hyperliquid function"""
     registry.register_feed("HYPERLIQUID___SWAP", HyperliquidRequestData)
     registry.register_exchange_data("HYPERLIQUID___SWAP", HyperliquidExchangeDataSwap)
     registry.register_balance_handler("HYPERLIQUID___SWAP", _hyperliquid_balance_handler)

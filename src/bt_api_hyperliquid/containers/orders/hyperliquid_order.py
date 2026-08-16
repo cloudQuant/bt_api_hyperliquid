@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -14,6 +15,7 @@ class HyperliquidRequestOrderData(OrderData):
     """Hyperliquid order data from REST API."""
 
     def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
         self.exchange_name = "HYPERLIQUID"
         self.local_update_time = time.time()
@@ -36,6 +38,7 @@ class HyperliquidRequestOrderData(OrderData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if self.has_been_init_data:
             return self
 
@@ -62,6 +65,7 @@ class HyperliquidRequestOrderData(OrderData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
                 "exchange_name": self.exchange_name,
@@ -84,51 +88,67 @@ class HyperliquidRequestOrderData(OrderData):
         return self.all_data
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_order_id(self):
+        """get_order_id method"""
         return self.order_id
 
     def get_client_order_id(self):
+        """get_client_order_id method"""
         return self.client_order_id
 
     def get_status(self):
+        """get_status method"""
         return self.status
 
     def get_side(self):
+        """get_side method"""
         return self.side
 
     def get_type(self):
+        """get_type method"""
         return self.type
 
     def get_quantity(self):
+        """get_quantity method"""
         return self.quantity
 
     def get_price(self):
+        """get_price method"""
         return self.price
 
     def get_filled_quantity(self):
+        """get_filled_quantity method"""
         return self.filled_quantity
 
     def get_remaining_quantity(self):
+        """get_remaining_quantity method"""
         return self.remaining_quantity
 
     def get_cost(self):
+        """get_cost method"""
         return self.cost
 
     def get_fee(self):
+        """get_fee method"""
         return self.fee
 
     def get_timestamp(self):
+        """get_timestamp method"""
         return self.timestamp
 
     def __str__(self):
@@ -139,6 +159,7 @@ class HyperliquidSpotWssOrderData(OrderData):
     """Hyperliquid WebSocket order data."""
 
     def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
         self.exchange_name = "HYPERLIQUID"
         self.local_update_time = time.time()
@@ -161,6 +182,7 @@ class HyperliquidSpotWssOrderData(OrderData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if self.has_been_init_data:
             return self
 
@@ -187,6 +209,7 @@ class HyperliquidSpotWssOrderData(OrderData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
                 "exchange_name": self.exchange_name,
@@ -209,51 +232,67 @@ class HyperliquidSpotWssOrderData(OrderData):
         return self.all_data
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_order_id(self):
+        """get_order_id method"""
         return self.order_id
 
     def get_client_order_id(self):
+        """get_client_order_id method"""
         return self.client_order_id
 
     def get_status(self):
+        """get_status method"""
         return self.status
 
     def get_side(self):
+        """get_side method"""
         return self.side
 
     def get_type(self):
+        """get_type method"""
         return self.type
 
     def get_quantity(self):
+        """get_quantity method"""
         return self.quantity
 
     def get_price(self):
+        """get_price method"""
         return self.price
 
     def get_filled_quantity(self):
+        """get_filled_quantity method"""
         return self.filled_quantity
 
     def get_remaining_quantity(self):
+        """get_remaining_quantity method"""
         return self.remaining_quantity
 
     def get_cost(self):
+        """get_cost method"""
         return self.cost
 
     def get_fee(self):
+        """get_fee method"""
         return self.fee
 
     def get_timestamp(self):
+        """get_timestamp method"""
         return self.timestamp
 
     def __str__(self):

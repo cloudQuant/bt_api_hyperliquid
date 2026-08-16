@@ -33,5 +33,4 @@ class HyperliquidErrorTranslator(ErrorTranslator):
             return ("INVALID_API_KEY", UnifiedErrorCode.INVALID_API_KEY.value)
         elif "permission denied" in error_msg_lower:
             return ("PERMISSION_DENIED", UnifiedErrorCode.PERMISSION_DENIED.value)
-        else:
-            return ("UNKNOWN_ERROR", UnifiedErrorCode.UNKNOWN_ERROR.value)
+        else: return ("UNKNOWN_ERROR", UnifiedErrorCode.UNKNOWN_ERROR.value)

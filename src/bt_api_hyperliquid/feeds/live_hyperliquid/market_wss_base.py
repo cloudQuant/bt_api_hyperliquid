@@ -1,3 +1,4 @@
+"""Module documentation"""
 from __future__ import annotations
 
 import json
@@ -15,6 +16,7 @@ class HyperliquidMarketWssData(Feed):
     """Base class for Hyperliquid market WebSocket data."""
 
     def __init__(self, data_queue: Any = None, **kwargs: Any) -> None:
+        """__init__ method"""
         super().__init__(data_queue, **kwargs)
         self.asset_type = kwargs.get("asset_type", "SPOT")
         self.logger_name = kwargs.get("logger_name", "hyperliquid_market_wss.log")
@@ -33,6 +35,7 @@ class HyperliquidMarketWssData(Feed):
         return RequestData(data, extra_data)
 
     def on_message(self, ws, message):
+        """on_message method"""
         try:
             data = json.loads(message)
             self.process_message(data)
@@ -40,24 +43,30 @@ class HyperliquidMarketWssData(Feed):
             self.request_logger.error(f"Error processing WebSocket message: {e}")
 
     def process_message(self, data):
+        """process_message method"""
         pass
 
     def on_open(self, ws):
+        """on_open method"""
         self.request_logger.info("WebSocket connection opened")
         for subscription in self.subscriptions:
             ws.send(json.dumps(subscription))
 
     def on_error(self, ws, error):
+        """on_error method"""
         self.request_logger.error(f"WebSocket error: {error}")
 
     def on_close(self, ws, close_status_code, close_msg):
+        """on_close method"""
         self.request_logger.info("WebSocket connection closed")
         self.is_running = False
 
     def subscribe(self, subscription):
+        """subscribe method"""
         self.subscriptions.append(subscription)
 
     def start(self):
+        """start method"""
         if self.is_running:
             return
         self.is_running = True
@@ -76,6 +85,7 @@ class HyperliquidMarketWssData(Feed):
         ws.run_forever(ping_interval=30)
 
     def stop(self):
+        """stop method"""
         self.is_running = False
         if self.ws_thread:
             self.ws_thread.join(timeout=5)

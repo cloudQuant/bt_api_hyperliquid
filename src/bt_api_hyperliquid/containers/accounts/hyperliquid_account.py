@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 import json
@@ -14,6 +15,7 @@ class HyperliquidSpotWssAccountData(AccountData):
     """Hyperliquid spot WebSocket account data."""
 
     def __init__(self, account_info, symbol_name, asset_type, has_been_json_encoded=False):
+        """__init__ method"""
         super().__init__(account_info, has_been_json_encoded)
         self.exchange_name = "HYPERLIQUID"
         self.local_update_time = time.time()
@@ -30,6 +32,7 @@ class HyperliquidSpotWssAccountData(AccountData):
         self.has_been_init_data = False
 
     def init_data(self):
+        """init_data method"""
         if self.has_been_init_data:
             return self
 
@@ -59,6 +62,7 @@ class HyperliquidSpotWssAccountData(AccountData):
         return self
 
     def get_all_data(self):
+        """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
                 "exchange_name": self.exchange_name,
@@ -75,33 +79,43 @@ class HyperliquidSpotWssAccountData(AccountData):
         return self.all_data
 
     def get_exchange_name(self):
+        """get_exchange_name method"""
         return self.exchange_name
 
     def get_local_update_time(self):
+        """get_local_update_time method"""
         return self.local_update_time
 
     def get_symbol_name(self):
+        """get_symbol_name method"""
         return self.symbol_name
 
     def get_asset_type(self):
+        """get_asset_type method"""
         return self.asset_type
 
     def get_user_address(self):
+        """get_user_address method"""
         return self.user_address
 
     def get_account_value(self):
+        """get_account_value method"""
         return self.account_value
 
     def get_total_margin_used(self):
+        """get_total_margin_used method"""
         return self.total_margin_used
 
     def get_initial_margin(self):
+        """get_initial_margin method"""
         return self.initial_margin
 
     def get_positions(self):
+        """get_positions method"""
         return self.positions
 
     def get_balances(self):
+        """get_balances method"""
         return self.balances
 
     def __str__(self):

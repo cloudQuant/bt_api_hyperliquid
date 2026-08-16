@@ -1,3 +1,4 @@
+"""Module-level docstring."""
 from __future__ import annotations
 
 from typing import Any
@@ -13,6 +14,7 @@ from bt_api_hyperliquid.registry_registration import register_hyperliquid
 def register_plugin(
     registry: type[ExchangeRegistry], runtime_factory: type[GatewayRuntimeRegistrar]
 ) -> PluginInfo:
+    """register_plugin function"""
     register_hyperliquid(registry)
 
     return PluginInfo(
