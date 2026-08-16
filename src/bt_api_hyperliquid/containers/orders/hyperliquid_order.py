@@ -8,7 +8,7 @@ from bt_api_base.containers.orders.order import OrderData
 from bt_api_base.functions.utils import from_dict_get_float, from_dict_get_string
 from bt_api_base.logging_factory import get_logger
 
-logger = get_logger("container")
+logger = get_logger('container')
 
 
 class HyperliquidRequestOrderData(OrderData):
@@ -17,7 +17,7 @@ class HyperliquidRequestOrderData(OrderData):
     def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded=False):
         """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
-        self.exchange_name = "HYPERLIQUID"
+        self.exchange_name = 'HYPERLIQUID'
         self.local_update_time = time.time()
         self.symbol_name = symbol_name
         self.asset_type = asset_type
@@ -46,21 +46,21 @@ class HyperliquidRequestOrderData(OrderData):
             if not self.has_been_json_encoded:
                 self.order_data = json.loads(self.order_info)
 
-            if isinstance(self.order_data, dict) and self.order_data.get("statuses"):
-                status = self.order_data["statuses"][0]
-                if "resting" in status:
-                    self.order_id = status["resting"].get("oid")
-                    self.status = "NEW"
-                    self.side = from_dict_get_string(status["resting"], "side")
-                    self.type = from_dict_get_string(status["resting"], "type")
-                    self.quantity = from_dict_get_float(status["resting"], "sz")
-                    self.price = from_dict_get_float(status["resting"], "limit_px")
+            if isinstance(self.order_data, dict) and self.order_data.get('statuses'):
+                status = self.order_data['statuses'][0]
+                if 'resting' in status:
+                    self.order_id = status['resting'].get('oid')
+                    self.status = 'NEW'
+                    self.side = from_dict_get_string(status['resting'], 'side')
+                    self.type = from_dict_get_string(status['resting'], 'type')
+                    self.quantity = from_dict_get_float(status['resting'], 'sz')
+                    self.price = from_dict_get_float(status['resting'], 'limit_px')
                     self.timestamp = time.time()
 
             self.has_been_init_data = True
 
         except Exception as e:
-            logger.error(f"Error initializing Hyperliquid order data: {e}", exc_info=True)
+            logger.error(f'Error initializing Hyperliquid order data: {e}', exc_info=True)
 
         return self
 
@@ -68,22 +68,22 @@ class HyperliquidRequestOrderData(OrderData):
         """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
-                "exchange_name": self.exchange_name,
-                "symbol_name": self.symbol_name,
-                "asset_type": self.asset_type,
-                "local_update_time": self.local_update_time,
-                "order_id": self.order_id,
-                "client_order_id": self.client_order_id,
-                "status": self.status,
-                "side": self.side,
-                "type": self.type,
-                "quantity": self.quantity,
-                "price": self.price,
-                "filled_quantity": self.filled_quantity,
-                "remaining_quantity": self.remaining_quantity,
-                "cost": self.cost,
-                "fee": self.fee,
-                "timestamp": self.timestamp,
+                'exchange_name': self.exchange_name,
+                'symbol_name': self.symbol_name,
+                'asset_type': self.asset_type,
+                'local_update_time': self.local_update_time,
+                'order_id': self.order_id,
+                'client_order_id': self.client_order_id,
+                'status': self.status,
+                'side': self.side,
+                'type': self.type,
+                'quantity': self.quantity,
+                'price': self.price,
+                'filled_quantity': self.filled_quantity,
+                'remaining_quantity': self.remaining_quantity,
+                'cost': self.cost,
+                'fee': self.fee,
+                'timestamp': self.timestamp,
             }
         return self.all_data
 
@@ -152,7 +152,7 @@ class HyperliquidRequestOrderData(OrderData):
         return self.timestamp
 
     def __str__(self):
-        return f"HyperliquidRequestOrderData(order_id={self.order_id}, status={self.status}, side={self.side})"
+        return f'HyperliquidRequestOrderData(order_id={self.order_id}, status={self.status}, side={self.side})'
 
 
 class HyperliquidSpotWssOrderData(OrderData):
@@ -161,7 +161,7 @@ class HyperliquidSpotWssOrderData(OrderData):
     def __init__(self, order_info, symbol_name, asset_type, has_been_json_encoded=False):
         """__init__ method"""
         super().__init__(order_info, has_been_json_encoded)
-        self.exchange_name = "HYPERLIQUID"
+        self.exchange_name = 'HYPERLIQUID'
         self.local_update_time = time.time()
         self.symbol_name = symbol_name
         self.asset_type = asset_type
@@ -191,20 +191,20 @@ class HyperliquidSpotWssOrderData(OrderData):
                 self.order_data = json.loads(self.order_info)
 
             if isinstance(self.order_data, dict):
-                self.order_id = from_dict_get_string(self.order_data, "oid")
-                self.status = from_dict_get_string(self.order_data, "status")
-                self.side = from_dict_get_string(self.order_data, "side")
-                self.type = from_dict_get_string(self.order_data, "type")
-                self.quantity = from_dict_get_float(self.order_data, "sz")
-                self.price = from_dict_get_float(self.order_data, "limit_px")
-                self.filled_quantity = from_dict_get_float(self.order_data, "filledSz")
-                self.remaining_quantity = from_dict_get_float(self.order_data, "remainingSz")
-                self.timestamp = from_dict_get_float(self.order_data, "time")
+                self.order_id = from_dict_get_string(self.order_data, 'oid')
+                self.status = from_dict_get_string(self.order_data, 'status')
+                self.side = from_dict_get_string(self.order_data, 'side')
+                self.type = from_dict_get_string(self.order_data, 'type')
+                self.quantity = from_dict_get_float(self.order_data, 'sz')
+                self.price = from_dict_get_float(self.order_data, 'limit_px')
+                self.filled_quantity = from_dict_get_float(self.order_data, 'filledSz')
+                self.remaining_quantity = from_dict_get_float(self.order_data, 'remainingSz')
+                self.timestamp = from_dict_get_float(self.order_data, 'time')
 
             self.has_been_init_data = True
 
         except Exception as e:
-            logger.error(f"Error initializing Hyperliquid WebSocket order data: {e}", exc_info=True)
+            logger.error(f'Error initializing Hyperliquid WebSocket order data: {e}', exc_info=True)
 
         return self
 
@@ -212,22 +212,22 @@ class HyperliquidSpotWssOrderData(OrderData):
         """get_all_data method"""
         if self.all_data is None:
             self.all_data = {
-                "exchange_name": self.exchange_name,
-                "symbol_name": self.symbol_name,
-                "asset_type": self.asset_type,
-                "local_update_time": self.local_update_time,
-                "order_id": self.order_id,
-                "client_order_id": self.client_order_id,
-                "status": self.status,
-                "side": self.side,
-                "type": self.type,
-                "quantity": self.quantity,
-                "price": self.price,
-                "filled_quantity": self.filled_quantity,
-                "remaining_quantity": self.remaining_quantity,
-                "cost": self.cost,
-                "fee": self.fee,
-                "timestamp": self.timestamp,
+                'exchange_name': self.exchange_name,
+                'symbol_name': self.symbol_name,
+                'asset_type': self.asset_type,
+                'local_update_time': self.local_update_time,
+                'order_id': self.order_id,
+                'client_order_id': self.client_order_id,
+                'status': self.status,
+                'side': self.side,
+                'type': self.type,
+                'quantity': self.quantity,
+                'price': self.price,
+                'filled_quantity': self.filled_quantity,
+                'remaining_quantity': self.remaining_quantity,
+                'cost': self.cost,
+                'fee': self.fee,
+                'timestamp': self.timestamp,
             }
         return self.all_data
 
@@ -296,4 +296,4 @@ class HyperliquidSpotWssOrderData(OrderData):
         return self.timestamp
 
     def __str__(self):
-        return f"HyperliquidSpotWssOrderData(order_id={self.order_id}, status={self.status}, side={self.side})"
+        return f'HyperliquidSpotWssOrderData(order_id={self.order_id}, status={self.status}, side={self.side})'

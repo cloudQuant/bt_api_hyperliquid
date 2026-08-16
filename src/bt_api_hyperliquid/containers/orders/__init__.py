@@ -6,6 +6,6 @@ from bt_api_hyperliquid.containers.orders.hyperliquid_order import (
 )
 
 __all__ = [
-    "HyperliquidRequestOrderData",
-    "HyperliquidSpotWssOrderData",
+    'HyperliquidRequestOrderData',
+    'HyperliquidSpotWssOrderData',
 ]
