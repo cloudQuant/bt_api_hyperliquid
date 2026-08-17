@@ -5,6 +5,7 @@ from typing import Any
 
 import requests
 from bt_api_base.containers.requestdatas.request_data import RequestData
+from bt_api_base.error import ErrorCategory, UnifiedError, UnifiedErrorCode
 from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
@@ -78,6 +79,31 @@ class HyperliquidRequestData(Feed):
 
         self.error_translator = HyperliquidErrorTranslator()
 
+    def translate_error(self, raw_response: Any) -> Any:
+        """Hyperliquid API 错误响应(status == err/error)翻译为 UnifiedError。"""
+        if isinstance(raw_response, dict):
+            status = raw_response.get("status")
+            if status in ("err", "error"):
+                error_msg = str(
+                    raw_response.get("response") or raw_response.get("message") or ""
+                )
+                _label, code_value = self.error_translator.translate_error(error_msg)
+                return UnifiedError(
+                    code=UnifiedErrorCode(code_value),
+                    category=ErrorCategory.BUSINESS,
+                    venue=self._params.exchange_name,
+                    message=error_msg,
+                    original_error=error_msg,
+                    context={"raw_response": raw_response},
+                )
+        return None
+
+    def _raise_if_error(self, raw_response: Any) -> None:
+        """API 响应含错误(status == err)时抛出翻译后的 UnifiedError。"""
+        error = self.translate_error(raw_response)
+        if error is not None:
+            raise error
+
     def request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
         """request method"""
         if extra_data is None:
@@ -91,6 +117,7 @@ class HyperliquidRequestData(Feed):
             headers['X-API-Key'] = self.api_key
 
         response = self.http_request('POST', url, headers, body, timeout)
+        self._raise_if_error(response)
         return RequestData(response, extra_data)
 
     async def async_request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
@@ -106,6 +133,7 @@ class HyperliquidRequestData(Feed):
             headers['X-API-Key'] = self.api_key
 
         response = self.http_request('POST', url, headers, body, timeout)
+        self._raise_if_error(response)
         self.async_logger.info(f'Async Request: POST {url}')
         return RequestData(response, extra_data)
 
