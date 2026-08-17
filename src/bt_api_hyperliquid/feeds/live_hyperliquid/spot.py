@@ -124,7 +124,7 @@ class HyperliquidRequestDataSpot(HyperliquidRequestData):
             extra_data,
             **kwargs,
         )
-        return self.request(path, body=body, extra_data=extra_data, is_sign=True)
+        return self.request(path, body=body, extra_data=extra_data)
 
     def place_order(
         self,
@@ -177,7 +177,7 @@ class HyperliquidRequestDataSpot(HyperliquidRequestData):
     def cancel_order(self, symbol, order_id, extra_data=None, **kwargs):
         """Cancel order following standard Feed interface. Returns RequestData."""
         path, body, extra_data = self._cancel_order(symbol, order_id, extra_data, **kwargs)
-        return self.request(path, body=body, extra_data=extra_data, is_sign=True)
+        return self.request(path, body=body, extra_data=extra_data)
 
     # ── Standard Interface: query_order ─────────────────────────────
 
@@ -299,7 +299,7 @@ class HyperliquidRequestDataSpot(HyperliquidRequestData):
             'request_type': 'modify_order',
             'order_id': order_id,
         }
-        return self.request(path, body=modify_params, extra_data=extra_data, is_sign=True)
+        return self.request(path, body=modify_params, extra_data=extra_data)
 
 
 class HyperliquidMarketWssDataSpot(HyperliquidMarketWssData):

@@ -10,7 +10,6 @@ from bt_api_base.feeds.capability import Capability
 from bt_api_base.feeds.feed import Feed
 from bt_api_base.logging_factory import get_logger
 from bt_api_base.rate_limiter import RateLimiter, RateLimitRule, RateLimitScope, RateLimitType
-from eth_account import Account
 
 from bt_api_hyperliquid.errors.hyperliquid_translator import HyperliquidErrorTranslator
 from bt_api_hyperliquid.exchange_data.hyperliquid_exchange_data import (
@@ -67,15 +66,9 @@ class HyperliquidRequestData(Feed):
         )
 
         self.api_key = kwargs.get('public_key') or kwargs.get('api_key', '')
-        self.private_key = kwargs.get('private_key') or kwargs.get('api_secret') or kwargs.get('secret_key') or ''
-        self.address = None
-
-        if self.private_key:
-            try:
-                self.account = Account.from_key(self.private_key)
-                self.address = self.account.address
-            except Exception as e:
-                self.request_logger.error(f'Invalid private key: {e}')
+        # Hyperliquid vault/agent 模式：仅支持 X-API-Key 头认证。
+        # 私钥/EIP-712 签名另立 backlog（见 docs/decisions/2026-08-17-hyperliquid-signing.md）。
+        self.address = kwargs.get('address', '')
 
         self.error_translator = HyperliquidErrorTranslator()
 
@@ -104,7 +97,7 @@ class HyperliquidRequestData(Feed):
         if error is not None:
             raise error
 
-    def request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
+    def request(self, path, params=None, body=None, extra_data=None, timeout=10):
         """request method"""
         if extra_data is None:
             extra_data = {}
@@ -120,7 +113,7 @@ class HyperliquidRequestData(Feed):
         self._raise_if_error(response)
         return RequestData(response, extra_data)
 
-    async def async_request(self, path, params=None, body=None, extra_data=None, timeout=10, is_sign=False):
+    async def async_request(self, path, params=None, body=None, extra_data=None, timeout=10):
         """async_request method"""
         if extra_data is None:
             extra_data = {}
@@ -466,16 +459,3 @@ class HyperliquidRequestData(Feed):
                 'request_type': 'get_user_funding',
             },
         )
-
-    def _make_signed_request(self, request_type, **kwargs):
-        if not self.account:
-            raise ValueError('Private key required for signed requests')
-        headers = {'Content-Type': 'application/json', 'User-Agent': 'bt_api_hyperliquid/1.0'}
-        url = self._params.rest_url + self._params.get_rest_path(request_type)
-        try:
-            response = requests.post(url, json=kwargs, headers=headers, timeout=10)
-            response.raise_for_status()
-            return response.json()
-        except requests.exceptions.RequestException as e:
-            self.request_logger.error(f'Signed request failed: {e}')
-            return {'status': 'error', 'message': str(e)}

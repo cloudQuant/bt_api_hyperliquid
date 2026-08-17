@@ -1,23 +1,20 @@
 """Module-level docstring."""
 import pytest
 from bt_api_hyperliquid.feeds.live_hyperliquid.request_base import HyperliquidRequestData
-def test_hyperliquid_accepts_public_private_key_aliases() -> None:
-    """test_hyperliquid_accepts_public_private_key_aliases function"""
+def test_hyperliquid_accepts_public_key_and_address() -> None:
+    """vault/agent 模式：api_key 用作 X-API-Key，address 显式传入（无私钥签名死代码）。"""
     request_data = HyperliquidRequestData(
         public_key="public-key",
-        private_key="0x59c6995e998f97a5a0044966f0945382d6f7d28e17f72c0f0f6f7d7f9d1c1b11",
+        address="0x0000000000000000000000000000000000000001",
     )
 
     assert request_data.api_key == "public-key"
-    assert request_data.private_key.startswith("0x59c699")
-    assert request_data.address is not None
+    assert request_data.address == "0x0000000000000000000000000000000000000001"
+    assert not hasattr(request_data, "private_key")
 
 
 def _make_hyperliquid_request_data() -> HyperliquidRequestData:
-    return HyperliquidRequestData(
-        public_key="public-key",
-        private_key="0x59c6995e998f97a5a0044966f0945382d6f7d28e17f72c0f0f6f7d7f9d1c1b11",
-    )
+    return HyperliquidRequestData(public_key="public-key")
 
 
 def test_hyperliquid_error_response_raises_invalid_signature() -> None:
