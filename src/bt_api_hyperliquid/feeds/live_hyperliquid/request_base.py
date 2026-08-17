@@ -127,7 +127,7 @@ class HyperliquidRequestData(Feed):
 
         response = self.http_request('POST', url, headers, body, timeout)
         self._raise_if_error(response)
-        self.async_logger.info(f'Async Request: POST {url}')
+        self.async_logger.info(f'Async Request: POST {self._sanitize_url_for_log(url)}')
         return RequestData(response, extra_data)
 
     def async_callback(self, future):
