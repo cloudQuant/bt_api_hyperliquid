@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import pytest
-
 from bt_api_base.gateway.registrar import GatewayRuntimeRegistrar
 from bt_api_base.plugins.errors import PluginOptionalDependencyError
 from bt_api_base.plugins.loader import PluginLoader

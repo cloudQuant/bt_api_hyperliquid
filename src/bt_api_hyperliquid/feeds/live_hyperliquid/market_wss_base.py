@@ -41,7 +41,6 @@ class HyperliquidMarketWssData(Feed):
 
     def process_message(self, data):
         """process_message method"""
-        pass
 
     def on_open(self, ws):
         """on_open method"""
