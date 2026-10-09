@@ -1,4 +1,4 @@
-# HYPERLIQUID
+﻿# HYPERLIQUID
 
 Exchange plugin for bt_api framework — decentralized perpetual futures exchange.
 

@@ -1,4 +1,4 @@
-# HYPERLIQUID Documentation
+﻿# HYPERLIQUID Documentation
 
 ## English
 
