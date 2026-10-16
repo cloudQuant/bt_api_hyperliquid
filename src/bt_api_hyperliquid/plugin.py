@@ -1,7 +1,6 @@
 """Module-level docstring."""
 from __future__ import annotations
 
-from bt_api_base.gateway.registrar import GatewayRuntimeRegistrar
 from bt_api_base.plugins.errors import PluginOptionalDependencyError
 from bt_api_base.plugins.protocol import PluginInfo
 from bt_api_base.registry import ExchangeRegistry
@@ -9,9 +8,7 @@ from bt_api_base.registry import ExchangeRegistry
 from bt_api_hyperliquid import __version__
 
 
-def register_plugin(
-    registry: type[ExchangeRegistry], runtime_factory: type[GatewayRuntimeRegistrar]
-) -> PluginInfo:
+def register_plugin(registry: type[ExchangeRegistry]) -> PluginInfo:
     """register_plugin function"""
     try:
         from bt_api_hyperliquid.registry_registration import register_hyperliquid
