@@ -323,3 +323,11 @@ MIT 许可证 — 详见 [LICENSE](LICENSE)。
 
 - 通过 [GitHub Issues](https://github.com/cloudQuant/bt_api_hyperliquid/issues) 反馈问题
 - 邮箱: yunjinqi@gmail.com
+
+## Provider role and integration boundary
+
+`plugin.py` advertises `HYPERLIQUID___SPOT` and `HYPERLIQUID___SWAP`. `registry_registration.py` wires request-feed, exchange-data, and balance handlers; its subscribe handlers start market and account WebSocket consumers. This is provider data-path wiring, not evidence that every order path is live or production-validated. This package owns Hyperliquid-specific API adaptation; `bt_api_base` supplies the shared plugin protocol and registry, while Backtrader owns strategy and backtest logic. See [Trading system architecture](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md).
+
+## 提供方职责与集成边界
+
+`plugin.py` 列出 `HYPERLIQUID___SPOT` 和 `HYPERLIQUID___SWAP`。`registry_registration.py` 注册请求 Feed、交易所数据和余额处理器；订阅处理器会启动行情与账户 WebSocket 消费者。这是提供方数据路径的接线信息，不代表所有订单路径均已支持或通过实盘验收。本包负责 Hyperliquid 专用 API 适配；`bt_api_base` 提供共享插件协议和注册表，Backtrader 负责策略与回测逻辑。架构说明：[Trading system architecture](https://github.com/cloudQuant/backtrader/blob/dev/docs/TRADING_SYSTEM_ARCHITECTURE.md)。
