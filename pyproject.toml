@@ -65,6 +65,10 @@ Changelog = "https://github.com/cloudQuant/bt_api_hyperliquid/blob/master/CHANGE
 HYPERLIQUID___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 HYPERLIQUID___SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
 
+[project.entry-points."bt_api.order_request_projections"]
+HYPERLIQUID___SPOT = "bt_api_base.order_request_projection:legacy_order_request_projection"
+HYPERLIQUID___SWAP = "bt_api_base.order_request_projection:legacy_order_request_projection"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
