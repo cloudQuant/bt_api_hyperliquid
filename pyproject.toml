@@ -101,3 +101,7 @@ python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
+
+[project.entry-points."bt_api.fee_projections"]
+HYPERLIQUID___SPOT = "bt_api_base.fee_projection:legacy_fee_projection"
+HYPERLIQUID___SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
