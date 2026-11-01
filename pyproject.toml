@@ -105,3 +105,7 @@ ignore_missing_imports = true
 [project.entry-points."bt_api.fee_projections"]
 HYPERLIQUID___SPOT = "bt_api_base.fee_projection:legacy_fee_projection"
 HYPERLIQUID___SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
+
+[project.entry-points."bt_api.order_side_projections"]
+HYPERLIQUID___SPOT = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+HYPERLIQUID___SWAP = "bt_api_base.order_side_projection:legacy_order_side_candidates"
