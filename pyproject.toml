@@ -61,6 +61,10 @@ Repository = "https://github.com/cloudQuant/bt_api_hyperliquid"
 Issues = "https://github.com/cloudQuant/bt_api_hyperliquid/issues"
 Changelog = "https://github.com/cloudQuant/bt_api_hyperliquid/blob/master/CHANGELOG.md"
 
+[project.entry-points."bt_api.order_identity_projections"]
+HYPERLIQUID___SPOT = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+HYPERLIQUID___SWAP = "bt_api_base.order_identity_projection:project_legacy_order_identity"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
