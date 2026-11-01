@@ -109,3 +109,7 @@ HYPERLIQUID___SWAP = "bt_api_base.fee_projection:legacy_fee_projection"
 [project.entry-points."bt_api.order_side_projections"]
 HYPERLIQUID___SPOT = "bt_api_base.order_side_projection:legacy_order_side_candidates"
 HYPERLIQUID___SWAP = "bt_api_base.order_side_projection:legacy_order_side_candidates"
+
+[project.entry-points."bt_api.normalization_policies"]
+HYPERLIQUID___SPOT = "bt_api_base.normalization_policy:legacy_normalization_policy"
+HYPERLIQUID___SWAP = "bt_api_base.normalization_policy:legacy_normalization_policy"
